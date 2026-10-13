@@ -6,7 +6,7 @@ const wss=new WebSocketServer({server,maxPayload:8192});let nextId=0;
 const clamp=(n,a,b)=>Math.max(a,Math.min(b,n)),dist=(a,b)=>Math.hypot(a.x-b.x,a.y-b.y),alive=r=>r.players.filter(p=>p.hp>0),count=(p,t)=>Object.keys(p.gear).filter(id=>gear[id].type===t).length;
 const cap=(p,t)=>t==='weapon'?(p.char==='arsenal'?6:(p.char==='trailkeeper'?4:3)+p.slots):t==='item'?8:1;
 const lv=(p,id)=>p.gear[id]||0,price=(p,id)=>Math.round(gear[id].price*(1+.2*lv(p,id))*(paidWeapon(p,id)?1.1:1)*(p.char==='engineer'?.8:1));
-function constrainArena(e,padding=18){const d=Math.hypot(e.x,e.y),r=2160-padding;if(d>r){e.x*=r/d;e.y*=r/d}return e}
+function constrainArena(e,padding=18){const d=Math.hypot(e.x,e.y),r=1650-padding;if(d>r){e.x*=r/d;e.y*=r/d}return e}
 function paidWeapon(p,id){return gear[id].type==='weapon'&&(lv(p,id)?!!p.weaponPremium?.[id]:count(p,'weapon')>=(p.char==='arsenal'?6:p.char==='trailkeeper'?4:3))}
 function fusionCost(out){return Math.round(30+gear[out].price*.5)}
 function send(ws,msg){if(ws.readyState===1&&(ws.bufferedAmount||0)<131072)ws.send(JSON.stringify(msg))}function error(ws,message){send(ws,{type:'error',message})}
