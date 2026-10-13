@@ -1,1 +1,11 @@
-{"name":"overfused-coop","version":"1.0.0","private":true,"scripts":{"start":"node server.cjs"},"dependencies":{"ws":"8.18.3"}}
+{
+  "name": "overfused-coop",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node server.cjs"
+  },
+  "dependencies": {
+    "ws": "8.22.0"
+  }
+}
