@@ -221,7 +221,7 @@ function drawGround(px,py){const size=96;for(let tx=Math.floor((px-W/2)/size)-1;
  } }
 function draw(){ctx.fillStyle='#09140f';ctx.fillRect(0,0,W,H);const px=run?run.x:0,py=run?run.y:0;ctx.save();ctx.translate(W/2-px,H/2-py);drawGround(px,py);
  for(const z of zones){ctx.globalAlpha=Math.min(.5,z.t*.3);ctx.fillStyle=z.color;ctx.beginPath();ctx.arc(z.x,z.y,z.r,0,Math.PI*2);ctx.fill();if(z.kind==='mine'){ctx.globalAlpha=1;ctx.strokeStyle=z.color;ctx.stroke();ctx.fillStyle='#fff';ctx.fillRect(z.x-2,z.y-2,4,4)}}ctx.globalAlpha=1;
- for(const g of gems){ctx.fillStyle='#c6fc70';ctx.save();ctx.translate(g.x,g.y);ctx.rotate(Math.PI/4);ctx.fillRect(-3,-3,6,6);ctx.restore()}
+ for(const g of gems){ctx.fillStyle='#0005';ctx.beginPath();ctx.ellipse(g.x,g.y+7,7,3,0,0,6.28);ctx.fill();ctx.save();ctx.translate(g.x,g.y+Math.sin(run.total*5+g.x)*1.5);ctx.rotate(Math.PI/4);ctx.shadowColor='#ffd775';ctx.shadowBlur=12;ctx.fillStyle='#f9c862';ctx.fillRect(-5,-5,10,10);ctx.shadowBlur=0;ctx.fillStyle='#fff0b6';ctx.fillRect(-3,-3,4,4);ctx.restore()}
  for(const h of hazards){ctx.strokeStyle='#ff8c8c';ctx.fillStyle=h.wait>0?'#ff77772a':'#ff8d7988';ctx.lineWidth=2;ctx.beginPath();ctx.arc(h.x,h.y,h.r,0,Math.PI*2);ctx.fill();ctx.stroke();if(h.wait>0){ctx.beginPath();ctx.arc(h.x,h.y,h.r*Math.max(.1,1-h.wait),0,Math.PI*2);ctx.stroke()}}
  for(const e of enemies)drawEnemy(e);
  for(const b of hostileShots){ctx.fillStyle='#ffb181';ctx.strokeStyle='#ff6868';ctx.lineWidth=2;ctx.beginPath();ctx.arc(b.x,b.y,b.r,0,Math.PI*2);ctx.fill();ctx.stroke()}
